@@ -1,0 +1,36 @@
+﻿    @{
+        ViewData["Title"] = "Home Page";
+    }
+
+    @section Scripts
+    { 
+
+        <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(() => {
+
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44357/VisitorHub").build(); @* BURADA SİGNALR İLE APİ'YE BAĞLANIYORUZ FAKAT BAĞLANDIGIMIZ YER BURADA 
+                                                                                                                             TAM OLARAK URL'İNİ VERMİYORUZ VERMİYORUZ BİZ VİSİTORHUB ADINDA OLUŞTURDUGUMUZ 
+                                                                                                                             CLASSI BURAYA URL OALRAK VERİYORUZ. SONRA BUİLD EDİP CAĞIRIYORUZ .   *@
+                $("#connectionStatus").text(connection.connectionState);   @* BAĞLANTININ DURUMUNU GÖRMEK ICIN BIR İSİM TANIMLIYORUZ 
+                                                                              BU ISIM ISTEDGIMIZ SEY OLABILIR BURADA CONNECTION STATUS 
+                                                                              VERDIK. BUNU DA HTML DE KULLACNAGIZ O YUZDEN "#" VAR   *@
+
+                connection.start().then(() => {
+
+                    $("#connectionStatus").text(connection.connectionState); @* BAĞLANTI İŞLEMİ GERÇEKLEŞTİKTEN HEMEN SONRAKİ DURUMUNU KONTROL ET  *@
+                }).catch((err) => {
+                    console.log(err)  // eğerki bir hata yakaarsan burada hatayı döndür
+                });
+            });
+        </script>
+
+    }
+
+    <div class="container">
+        <br />
+        <div class="alert alert-warning">
+            Bağlantınızın Durumu : <b id="connectionStatus"></b>
+        </div>
+    </div>

@@ -1,0 +1,72 @@
+﻿@model List<ContactUs>
+@{
+    ViewData["Title"] = "RecycleBinList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int sayac = 0;
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.5); /* Modal arka planını koyulaştırmak için bir rgba renk değeri kullanıyoruz */
+    }
+</style>
+
+<h1>Çöp Kutusu Mesajları / Misafirimiz Olmayanlar </h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Gönderen</th>
+        <th>Konu</th>
+        <th>Tarih</th>
+        <th>Sil</th>
+        <th>Mesajı aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        sayac++;
+        <tr>
+            <th>@sayac</th>
+            <td>@item.Name</td>
+            <td>@item.Subject</td>
+            <td>@item.MessageDate.ToString("dd.MMM.yyyy")</td>
+            <td><a href="/AdminsArea/ContactUs/DeleteMessage/@item.ContactUsID" class="btn btn-outline-danger">Sil</a></td>
+            <td><a onclick='ShowInfo("@item.MessageBody")' data-backdrop="static" data-toggle="modal" data-target="#showModal" class="btn btn-outline-dark">Mesajı aç</a></td>
+        </tr>
+    }
+</table>
+
+
+<div class="modal" id="showModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">İçerik</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="infoText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function ShowInfo(description) {
+
+        var valueInfo = description;
+
+        $('#infoText').text(valueInfo); // Modal içeriğini güncelle
+
+    }
+</script>
+

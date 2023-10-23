@@ -1,0 +1,89 @@
+﻿@model EntityLayer.Concrete.Reservation
+@{
+    ViewData["Title"] = "NewReservation";
+    Layout = "~/Views/Shared/_MemberNewLayout.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js" integrity="sha256-S/HO+Ru8zrLDmcjzwxjl18BQYDCvFDD7mPrwJclX6U8=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css" integrity="sha256-VJuwjrIWHWsPSEvQV4DiPfnZi7axOaiWwKfXaJnR5tA=" crossorigin="anonymous">
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Yeni Rezervasyon Sayfası</h4>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                        <li><a data-action="close"><i class="ft-x"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    <p class="card-text">
+                        Web Sitemiz Traversal üzerinde yer olan lokasyonlar içinde yeni bir rezervasyonu aşağıda ki panelden yapabilirsiniz
+                        
+                    </p>
+                   
+                    <form method="post" id="reservationForm">
+                        <div class="form-group">
+                            <label>Lokasyon</label>
+                            @Html.DropDownListFor(x => x.DestinationId, (List<SelectListItem>)ViewBag.v, new { @class = "form-control", id = "destination" })
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Kişi Sayısı</label>
+                            <input type="text" asp-for="PersonCount" id="personcount" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Tarih</label>
+                            <input type="date" asp-for="ReservationDate" id="restime" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Varsa Eklemek İstedikleriniz</label>
+                            <input type="text" asp-for="Description" id="description" class="form-control" />
+                        </div>
+
+                        <button class="btn btn-outline-success" type="button" onclick="Confirm()">Rezervasyon Yap</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Confirm() {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Rezervasyon Eklenecektir.",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet Ekle'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Başarılı!',
+                    'Rezervasyon başvurunuz başarı ile iletilmiştir!',
+                    'success'
+                   
+                ).then(() => {
+                    
+                    document.querySelector('#reservationForm').submit();
+                });
+
+
+            }
+        });
+    }
+</script>

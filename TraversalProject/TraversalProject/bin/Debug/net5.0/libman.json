@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "defaultProvider": "jsdelivr",
+  "libraries": [
+    {
+      "library": "bootstrap@5.3.2",
+      "destination": "wwwroot/bootstrap/",
+      "files": [
+        "dist/js/bootstrap.min.js"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/jquery/",
+      "files": [
+        "jquery.js"
+      ]
+    }
+  ]
+}

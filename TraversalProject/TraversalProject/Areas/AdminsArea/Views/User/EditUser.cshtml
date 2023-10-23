@@ -1,0 +1,29 @@
+﻿@model TraversalProject.Models.ChangeUserDataViewModel
+@{
+    ViewData["Title"] = "EditUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Misafir/Kullanıcı Bilgilerini Düzenleme Sayfası</h1>
+
+
+<form method="post">
+
+    <div class="form-group">
+        <label>Ad</label>
+        <input type="text" asp-for="name" class="form-control" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label>Soyad</label>
+        <input type="text" asp-for="surname" class="form-control" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label>UserName</label>
+        <input type="text" asp-for="userName" id="personcount" class="form-control" />
+    </div>
+    <br />
+  
+    <button class="btn btn-outline-primary">Güncelle</button>
+</form>

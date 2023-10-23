@@ -1,0 +1,68 @@
+﻿@model List<ApiMoviewViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">*@
+
+<!-- jQuery sadece bu sayfa için -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper.js sadece bu sayfa için -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Bootstrap JavaScript sadece bu sayfa için -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+    .table td {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+</style>
+
+<h1>Api Top 100 Film Listesi </h1>
+
+<br />
+
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Film Adı</th>
+        <th>Imdb Puanı</th>
+        <th>Yapım Yılı</th>
+        <th>Açıklaması</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.rank</th>
+            <td>@item.title</td>
+            <td>@item.rating</td>
+            <td>@item.year</td>
+            <td><button type="button" class="btn btn-outline-info" data-toggle="modal" onclick="ShowPopUp('@Html.Raw(item.description)')"  data-target="#Modal1">Detaylar</button></td>
+
+        </tr>
+    }
+</table>
+
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Detaylar</h2>
+            </div>
+            <div class="modal-body">
+                <label class="author" id="descriptionLabel"></label>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    function ShowPopUp(content) {
+
+        $("#descriptionLabel").text(content);
+    }
+</script>

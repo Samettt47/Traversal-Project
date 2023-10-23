@@ -1,0 +1,18 @@
+﻿@model SubAbout
+@{
+    ViewData["Title"] = "EditSubAbout";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Alt Hakkında Düzenleme Sayfası</h1>
+
+<form method="post">
+    <input type="hidden"  asp-for="SubAboutId"/>
+    <label>Başlık</label>
+    <input type="text" asp-for="Title" class="form-control" />
+    <br />
+    <label>İçerik</label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <br />
+    <button class="btn btn-outline-success">Düzenle</button>
+</form>
